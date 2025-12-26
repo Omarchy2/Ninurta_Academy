@@ -697,17 +697,17 @@
         <h2 class="heading">Contact <span>Us!</span></h2>
         <h2 class="heading">تواصل <span>معنا</span></h2>
 
-        <form action="#" id="contactForm">
+        <form id="contactForm">
             <div class="input-box">
-                <input type="text" placeholder="Full Name " id="name" autocomplete="off">
-                <input type="email" placeholder="Email Address" id="email" autocomplete="off">
+                <input name="name" type="text" placeholder="Full Name " id="name" autocomplete="off">
+                <input name="email" type="email" placeholder="Email Address" id="email" autocomplete="off">
             </div>
 
             <div class="input-box">
-                <input type="number" placeholder="Mobile Number" id="phone" autocomplete="off">
-                <input type="text" placeholder="Email Subject " id="subject" autocomplete="off">
+                <input name="phone" type="number" placeholder="Mobile Number" id="phone" autocomplete="off">
+                <input name="subject" type="text" placeholder="Email Subject " id="subject" autocomplete="off">
             </div>
-            <textarea id="message" cols="30" rows="10" placeholder="Your Message " autocomplete="off"></textarea>
+            <textarea name="text" id="message" cols="30" rows="10" placeholder="Your Message " autocomplete="off"></textarea>
             <input type="submit" value="Send Message" class="btn">
         </form>
     </section>
@@ -723,7 +723,41 @@
 
     <script src="https://unpkg.com/scrollreveal"></script>
 
+
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <script>
+        const form = document.getElementById("contactForm");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const formData = {
+                name: form.name.value,
+                phone: form.phone.value,
+                email: form.email.value,
+                subject: form.subject.value,
+                text: form.text.value,
+            };
+
+            try {
+                const response = await fetch("https://ninurtappi.vercel.app/send-email", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                const data = await response.json();
+                console.log("Server response:", data);
+                alert("تم إرسال الرسالة بنجاح ✅");
+            } catch (error) {
+                console.error("Error:", error);
+                alert("صار خطأ أثناء الإرسال ❌");
+            }
+        });
+    </script>
 
 
     <script>
@@ -791,45 +825,7 @@
             loop: true
         });
 
-        const form = document.querySelector("form");
-        const fullName = document.getElementById("name")
-        const email = document.getElementById("email")
-        const phone = document.getElementById("phone")
-        const subject = document.getElementById("subject")
-        const mess = document.getElementById("message")
 
-        function sendEmail() {
-            const bodyMessage = `Full Name: ${fullName.value}<br> Email: ${email.value}<br> Phone Number: ${phone.value}<br> Message: ${mess.value}`;
-            
-            fetch("https://formsubmit.co/ajax/ninurtaacademy@gmail.com", {
-                method: "POST",
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: fullName.value,
-                    email: email.value,
-                    phone: phone.value,
-                    subject: subject.value,
-                    message: mess.value,
-                    _template: 'table' // Optional: prettier email format
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert("Message Sent Successfully!");
-                form.reset(); // Clear the form after sending
-            })
-            .catch(error => {
-                alert("Something went wrong. Please try again or contact us directly via WhatsApp.");
-                console.error(error);
-            });
-        }
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
-            sendEmail()
-        });
     </script>
 </body>
 
