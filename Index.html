@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninurta Academy</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" type="image/png" href="logo.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            border: none;
+            outline: none;
+            scroll-behavior: smooth;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --bg-color: #1f242d;
+            --second-bg-cloro: #323946;
+            --text-color: #fff;
+            --main-color: #0ef;
+
+        }
+
+        html {
+            font-size: 62.5%;
+            overflow-y: auto;
+            /* أو overflow: auto scroll */
+
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 10rem 9% 2rem;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 9%;
+            background: var(--bg-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+
+        }
+
+        .header.sticky {
+            border-bottom: .1rem solid rgba(0, 0, 0, .2);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            color: var(--text-color);
+            font-weight: 600;
+            cursor: default;
+            transition: .3s;
+        }
+
+        .navbar a {
+            font-size: 1.7rem;
+            color: var(--text-color);
+            margin-left: 4rem;
+
+        }
+
+        .navbar a:hover,
+        .navbar a.active {
+            color: var(--main-color);
+
+        }
+
+        #menu-icon {
+            font-size: 3.6rem;
+            color: var(--text-color);
+            display: none;
+        }
+
+        .home {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .home-img img {
+            width: 35vw;
+            animation: floatImage 4s ease-in-out infinite;
+        }
+
+        @keyframes floatImage {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-2.4rem);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .home-content h3 {
+            font-size: 3.2rem;
+            font-weight: 700;
+
+        }
+
+        .home-content h3:nth-of-type(2) {
+            margin-bottom: 2rem;
+        }
+
+        span {
+            color: var(--main-color);
+        }
+
+        .home-content h1 {
+            font-size: 5.6rem;
+            font-weight: 700;
+        }
+
+        .home-content p {
+            font-size: 2.5rem;
+        }
+
+        .social-media a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 4rem;
+            height: 4rem;
+            background: transparent;
+            border: .2rem solid var(--main-color);
+            border-radius: 50%;
+            font-size: 2rem;
+            color: var(--main-color);
+            margin: 3rem 1.5rem 3rem 0;
+            transition: .5s ease;
+        }
+
+        .social-media a:hover {
+            background: var(--main-color);
+            color: var(--second-bg-cloro);
+            box-shadow: 0 0 1rem var(--main-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.8rem;
+            background: var(--main-color);
+            border-radius: 4rem;
+            box-shadow: 0 0 1rem var(--main-color);
+            font-size: 1.6rem;
+            color: var(--second-bg-cloro);
+            letter-spacing: .1rem;
+            font-weight: 600;
+            transition: .5s ease;
+        }
+
+        .btn:hover {
+            box-shadow: none;
+        }
+
+        .about {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            background: var(--second-bg-cloro);
+
+        }
+
+        .about-img img {
+            width: 35vw;
+        }
+
+        .heading {
+            text-align: center;
+            font-size: 5.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .about-content h2 {
+            text-align: left;
+            line-height: 1.2;
+        }
+
+        .about-content h3 {
+            font-size: 4rem;
+            padding-left: 3.2rem;
+        }
+
+        .about-content p {
+            font-size: 3.2rem;
+            margin: 2rem 0 3rem;
+            text-align-last: center;
+        }
+
+        .services h2 {
+            margin-bottom: 5rem;
+        }
+
+        .services-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .services-container .services-box {
+            flex: 1 1 30rem;
+            background: var(--second-bg-cloro);
+            padding: 3rem 2rem 4rem;
+            border-radius: 2rem;
+            text-align: center;
+            border: .2rem solid var(--bg-color);
+            transition: .5s ease;
+        }
+
+        .services-container .services-box:hover {
+            border-color: var(--main-color);
+            transform: scale(1.02);
+        }
+
+        .services-box i {
+            font-size: 7rem;
+            color: var(--main-color);
+        }
+
+        .services-box h3 {
+            font-size: 2.6rem;
+        }
+
+        .services-box p {
+            font-size: 2.3rem;
+            margin: 1rem 0 3rem;
+        }
+
+        .portfolio {
+            background: var(--second-bg-cloro);
+        }
+
+        .portfolio h2 {
+            margin-bottom: 4rem;
+        }
+
+        .portfolio-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .portfolio-container .portfolio-box {
+            position: relative;
+            border-radius: 2rem;
+            box-shadow: 0 0 1rem var(--bg-color);
+            overflow: hidden;
+            display: flex;
+        }
+
+        .portfolio-box img {
+            width: 100%;
+            transition: .5s ease;
+        }
+
+        .portfolio-box:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-box .portfolio-layer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, .1), var(--main-color));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 0 4rem;
+            transform: translateY(100%);
+            transition: .5s ease;
+
+        }
+
+        .portfolio-box:hover .portfolio-layer {
+            transform: translateY(0);
+        }
+
+        .portfolio-layer h4 {
+            font-size: 4.5rem;
+
+        }
+
+        .portfolio-layer p {
+            font-size: 3.2rem;
+            margin: .3rem 0 1rem;
+        }
+
+        .portfolio-layer a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 5rem;
+            height: 5rem;
+            background: var(--text-color);
+            border-radius: 50%;
+        }
+
+        .portfolio-layer a i {
+            font-size: 2rem;
+            color: var(--second-bg-cloro);
+        }
+
+        .contact h2 {
+            margin: 3rem;
+
+        }
+
+        .contact form {
+            max-width: 70rem;
+            margin: 1rem auto;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .contact form .input-box {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .contact form .input-box input,
+        .contact form textarea {
+            width: 100%;
+            padding: 1.5rem;
+            font-size: 1.6rem;
+            color: var(--text-color);
+            background: var(--second-bg-cloro);
+            border-radius: .8rem;
+            margin: .7rem 0;
+        }
+
+        .contact form .input-box input {
+            width: 49%;
+        }
+
+        .contact form textarea {
+            resize: none;
+        }
+
+        .contact form .btn {
+            margin-top: 2rem;
+            cursor: pointer;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 2rem;
+            background: var(--second-bg-cloro);
+        }
+
+        .footer-text p {
+            font-size: 1.6rem;
+        }
+
+        .footer-iconTop a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: .8rem;
+            background: var(--main-color);
+            border-radius: .8rem;
+            transition: .5s ease;
+
+        }
+
+        .footer-iconTop a:hover {
+            box-shadow: 0 0 1rem var(--second-bg-cloro);
+        }
+
+        .footer-iconTop a i {
+            font-size: 2.4rem;
+            color: var(--second-bg-cloro);
+        }
+
+        @media (max-width: 1200px) {
+            html {
+                font-size: 55%;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .header {
+                padding: 2rem 3%;
+            }
+
+            section {
+                padding: 10rem 3% 2rem;
+            }
+
+            .services {
+                padding-bottom: 7rem;
+            }
+
+            .portfolio {
+                padding-bottom: 7rem;
+            }
+
+            .contact {
+                min-height: auto;
+            }
+
+            .footer {
+                padding: 2rem 3%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #menu-icon {
+                display: block;
+            }
+
+            .navbar {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1rem 3%;
+                background: var(--bg-color);
+                border-top: .1rem solid rgba(0, 0, 0, .2);
+                box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+                display: none;
+            }
+
+            .navbar.active {
+                display: block;
+            }
+
+            .navbar a {
+                display: block;
+                font-size: 2rem;
+                margin: 3rem 0;
+            }
+
+            .home {
+                flex-direction: column;
+            }
+
+            .home-content h3 {
+                font-size: 2.6rem;
+            }
+
+            .home-content h1 {
+                font-size: 5rem;
+            }
+
+            .home-img img {
+                width: 70vw;
+                margin-top: 4rem;
+            }
+
+            .about {
+                flex-direction: column-reverse;
+            }
+
+            .about img {
+                width: 70vw;
+                margin-top: 4rem;
+            }
+
+            .services h2 {
+                margin-bottom: 3rem;
+            }
+
+            .portfolio h2 {
+                margin-bottom: 3rem;
+            }
+
+            .portfolio-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 617px) {
+            .portfolio-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 450px) {
+            html {
+                font-size: 50%;
+            }
+
+            .contact form .input-box input {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 365px) {
+            .home-img img {
+                width: 90vw;
+            }
+
+            .about-img img {
+                width: 90vw;
+            }
+
+            .footer {
+                flex-direction: column-reverse;
+            }
+
+            .footer p {
+                text-align: center;
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <a href="#" class="logo">Ninurta</a>
+
+        <i class='bx bx-menu' id="menu-icon"></i>
+
+        <nav class="navbar">
+            <a href="#Home" class="active">Home</a>
+            <a href="#About">About</a>
+            <a href="#Service">Services</a>
+            <a href="#Portfolio">Portfolio</a>
+            <a href="#Contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="home" id="Home">
+        <div class="home-content">
+            <h3>مرحباً بكم في</h3>
+            <h1>Ninurta Academy</h1>
+            <h3>We Offer <span class="multiple-text"></span></h3>
+            <p>أكاديمية نينورتا هي مؤسسة تعليمية متخصصة في تقديم مجموعة متنوعة من الخدمات التعليمية والدعم الأكاديمي</p>
+            <div class="social-media">
+                <a href="https://www.instagram.com/ninurta_academy?igsh=MW1sOTUwd3IzZWMyaw=="><i
+                        class='bx bxl-instagram'></i></a>
+                <a href="https://wa.me/9647745748748"><i class='bx bxl-whatsapp'></i></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61561213005938"><i class='bx bxl-facebook'></i></a>
+            </div>
+            <a download="Ninurta_Academy" href="NA.pdf" class="btn">Download PDF</a>
+        </div>
+
+        <div class="home-img">
+            <img src="logo 3.png" alt="">
+        </div>
+
+
+
+    </section>
+
+    <section class="about" id="About">
+        <div class="about-img">
+            <img src="logo.png" alt="">
+        </div>
+        <div class="about-content">
+            <h2 class="heading">About <span>Us</span></h2>
+            <h3>معلومات <span>عنا</span></h3>
+            <p>تقدم أكاديمية نينورتا دعم متكامل للطلاب والباحثين من خلال خدمات متنوعة كدورات في اللغة ودورات تحضيرية
+                لأختبار الآيلتس والترجمة القانونية، ودورات في التصميم الجرافيكي، تساعدهم على تحقيق أهدافهم
+                الأكاديمية المهنية</p>
+            <a href="read_more.html" class="btn">Read More</a>
+        </div>
+    </section>
+
+    <section class="service" id="Service">
+        <h2 class="heading">Our <span>Services</span></h2>
+        <h2 class="heading"> خـدمـاتـنـا</h2>
+        <div class="services-container">
+            <div class="services-box">
+                <i class='bx bx-book'></i>
+                <h3>Courses</h3>
+                <p>دورات خاصة باللغة الإنجليزية، دورات خاصة بإختبار الآيلتس، دورات خاصة بالتصميم الجرافيكي</p>
+                <a href="Our_Services.html" class="btn">Read More</a>
+            </div>
+            <div class="services-box">
+                <i class='bx bxs-book-reader'></i>
+                <h3>Scholerships</h3>
+                <p>التقديم للمنح الدراسية والخدمات المتعلقة بها</p>
+                <a href="Scholerships.html" class="btn">Read More</a>
+            </div>
+            <div class="services-box">
+                <i class='bx bx-text'></i>
+                <h3>Translatoin</h3>
+                <p>توفير خدمات الترجمة القانونية المصدقة للعقود والوثائق والأوراق الرسمية</p>
+                <a href="Translation.html" class="btn">Read More</a>
+            </div>
+        </div>
+
+    </section>
+    <section class="portfolio" id="Portfolio">
+        <h2 class="heading">مـهام <span>الأكــاديميــة</span></h2>
+
+        <div class="portfolio-container">
+            <div class="portfolio-box">
+                <img src="Designs/ILETS.png" alt="" loading="lazy">
+                <div class="portfolio-layer">
+                    <h4>الآيـلـتـس</h4>
+                    <p>دورات تحضيرية لإختبار الآيلتس</p>
+                    <a href="#"><i class='bx bx-link-external'></i></a>
+                </div>
+            </div>
+
+            <div class="portfolio-box">
+                <img src="Designs/Translation.png" alt="" loading="lazy">
+                <div class="portfolio-layer">
+                    <h4>تـرجمة مـصدقـة</h4>
+                    <p>ترجمة قانونية مصدقة</p>
+                    <a href="#"><i class='bx bx-link-external'></i></a>
+                </div>
+            </div>
+
+            <div class="portfolio-box">
+                <img src="Designs/graphic design.png" alt="" loading="lazy">
+                <div class="portfolio-layer">
+                    <h4>التصميم الجرافيـكـي</h4>
+                    <p>دورات في التصميم الجرافيكي</p>
+                    <a href="#"><i class='bx bx-link-external'></i></a>
+                </div>
+            </div>
+
+            <div class="portfolio-box">
+                <img src="Designs/english courses.png" alt="" loading="lazy">
+                <div class="portfolio-layer">
+                    <h4>دورات اللغة الإنجليزية</h4>
+                    <p>دورات تدريبية في اللغة الإنجليزية </p>
+                    <a href="#"><i class='bx bx-link-external'></i></a>
+                </div>
+            </div>
+
+            <div class="portfolio-box">
+                <img src="Designs/Scholerships.png" alt="" loading="lazy">
+                <div class="portfolio-layer">
+                    <h4>منح دراسيــة</h4>
+                    <p>مساعدة الطلبة في التقديم للمنح الدراسية</p>
+                    <a href="#"><i class='bx bx-link-external'></i></a>
+                </div>
+            </div>
+
+            <div class="portfolio-box">
+                <img src="Designs/research.png" alt="" loading="lazy">
+                <div class="portfolio-layer">
+                    <h4>بحوث وتقارير</h4>
+                    <p>مساعدة الباحثين في البحوث والتقارير </p>
+                    <a href="#"><i class='bx bx-link-external'></i></a>
+                </div>
+            </div>
+
+            <div class="portfolio-box">
+                <img src="Designs/web design.png" alt="" loading="lazy">
+                <div class="portfolio-layer">
+                    <h4>مواقع الكترونية</h4>
+                    <p>عمل مواقع الكترونية تعريفية</p>
+                    <a href="#"><i class='bx bx-link-external'></i></a>
+                </div>
+            </div>
+
+
+        </div>
+
+    </section>
+
+    <section class="contact" id="Contact">
+        <h2 class="heading">Contact <span>Us!</span></h2>
+        <h2 class="heading">تواصل <span>معنا</span></h2>
+
+        <form action="#" id="contactForm">
+            <div class="input-box">
+                <input type="text" placeholder="Full Name " id="name" autocomplete="off">
+                <input type="email" placeholder="Email Address" id="email" autocomplete="off">
+            </div>
+
+            <div class="input-box">
+                <input type="number" placeholder="Mobile Number" id="phone" autocomplete="off">
+                <input type="text" placeholder="Email Subject " id="subject" autocomplete="off">
+            </div>
+            <textarea id="message" cols="30" rows="10" placeholder="Your Message " autocomplete="off"></textarea>
+            <input type="submit" value="Send Message" class="btn">
+        </form>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-text">
+            <p>Copyright &copy; 2024 by Ninurta | All Right Reserved</p>
+        </div>
+        <div class="footer-iconTop">
+            <a href="#Home"><i class='bx bx-up-arrow-alt'></i></a>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+
+    <script>
+        /*---toggle icon navbar---*/
+        let menuIcon = document.querySelector('#menu-icon');
+        let navbar = document.querySelector('.navbar');
+
+        menuIcon.onclick = () => {
+            menuIcon.classList.toggle('bx-x');
+            navbar.classList.toggle('active');
+        };
+
+
+        /*scroll section active link*/
+        let sections = document.querySelectorAll('section');
+        let navLinks = document.querySelectorAll('header nav a');
+        let header = document.querySelector('header');
+
+        window.onscroll = () => {
+            let top = window.scrollY;
+
+            sections.forEach(sec => {
+                let offset = sec.offsetTop - 150;
+                let height = sec.offsetHeight;
+                let id = sec.getAttribute('id');
+
+                if (top >= offset && top < offset + height) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href').includes(id)) {
+                            link.classList.add('active');
+                        }
+                    });
+                };
+            });
+            /*---sticky navbar---*/
+            header.classList.toggle('sticky', top > 100);
+
+            /*---############---*/
+            menuIcon.classList.remove('bx-x');
+            navbar.classList.remove('active');
+
+        };
+
+
+        ScrollReveal({
+            /*reset: true,*/
+            distance: '80px',
+            duration: 1000,
+            delay: 100
+        });
+
+        ScrollReveal().reveal('.home-content, .heading', { origin: 'top' });
+        ScrollReveal().reveal('.home-img, .services-container, .potfolio-box, .contact form', { origin: 'bottom' });
+        ScrollReveal().reveal('.home-content h1, .about-img', { origin: 'left' });
+        ScrollReveal().reveal('.home-content p, .about-content', { origin: 'right' });
+
+
+
+        const typed = new Typed('.multiple-text', {
+            strings: ['English &amp; Programming Courses', 'Scholorships', 'Academic Research', 'Legal &amp; Literary Translation', 'Web Development'],
+            typeSpeed: 30,
+            backSpeed: 30,
+            backDelay: 1000,
+            loop: true
+        });
+
+        const form = document.querySelector("form");
+        const fullName = document.getElementById("name")
+        const email = document.getElementById("email")
+        const phone = document.getElementById("phone")
+        const subject = document.getElementById("subject")
+        const mess = document.getElementById("message")
+
+        function sendEmail() {
+            const bodyMessage = `Full Name: ${fullName.value}<br> Email: ${email.value}<br> Phone Number: ${phone.value}<br> Message: ${mess.value}`;
+            
+            fetch("https://formsubmit.co/ajax/ninurtaacademy@gmail.com", {
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: fullName.value,
+                    email: email.value,
+                    phone: phone.value,
+                    subject: subject.value,
+                    message: mess.value,
+                    _template: 'table' // Optional: prettier email format
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Message Sent Successfully!");
+                form.reset(); // Clear the form after sending
+            })
+            .catch(error => {
+                alert("Something went wrong. Please try again or contact us directly via WhatsApp.");
+                console.error(error);
+            });
+        }
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            sendEmail()
+        });
+    </script>
+</body>
+
+</html>
